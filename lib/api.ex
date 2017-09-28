@@ -26,13 +26,13 @@ defmodule FacebookMarketex.Api do
     |> Map.get("data")
   end
 
-  def get_campaign_insights(campaign_id, fields, from, to, breakdowns \\ []) do
-    get("/v2.10/" <> campaign_id <> "/insights",
+  def get_insights(id, fields, from, to, level \\ "", breakdowns \\ []) do
+    get("/v2.10/" <> id <> "/insights",
         query: [
           fields: Enum.join(fields, ","),
           time_range: Poison.encode!(%{"since": from, "until": to}),
           breakdowns: breakdowns,
-          level: "adset",
+          level: level,
           use_account_attribution_setting: true
         ]
     ).body
