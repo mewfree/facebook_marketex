@@ -7,10 +7,6 @@ defmodule FacebookMarketex.Api do
 
   adapter Tesla.Adapter.Hackney
 
-  # defp parse_data(result_body) do
-    # Map.get(result_body, "data")
-  # end
-
   def ad_accounts(fields \\ []) do
     get("/v2.10/me/adaccounts", query: [fields: Enum.join(fields, ",")]).body
     |> Map.get("data")
