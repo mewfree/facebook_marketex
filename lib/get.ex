@@ -1,4 +1,4 @@
-defmodule FacebookMarketex.Api do
+defmodule FacebookMarketex.Get do
   use Tesla
 
   plug Tesla.Middleware.BaseUrl, "https://graph.facebook.com"
@@ -12,21 +12,21 @@ defmodule FacebookMarketex.Api do
     |> Map.get("data")
   end
 
-  def get_data(id, fields) do
+  def data(id, fields) do
     get("/v2.10/" <> id, query: [fields: Enum.join(fields, ",")]).body
   end
 
-  def get_name(id) do
-    get_data(id, ["name"])
+  def name(id) do
+    data(id, ["name"])
     |> Map.get("name")
   end
 
-  def get_campaigns(account_id, fields \\ []) do
+  def campaigns(account_id, fields \\ []) do
     get("/v2.10/" <> account_id <> "/campaigns", query: [fields: Enum.join(fields, ",")]).body
     |> Map.get("data")
   end
 
-  def get_insights(id, fields, from, to, level \\ "", breakdowns \\ []) do
+  def insights(id, fields, from, to, level \\ "", breakdowns \\ []) do
     get("/v2.10/" <> id <> "/insights",
         query: [
           fields: Enum.join(fields, ","),
