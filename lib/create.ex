@@ -7,10 +7,11 @@ defmodule FacebookMarketex.Create do
 
   adapter Tesla.Adapter.Hackney
 
-  def campaign(account_id, name, objective) do
+  def campaign(account_id, name, objective, status \\ "PAUSED") do
     query_data = %{
       "name" => name,
-      "objective" => objective
+      "objective" => objective,
+      "status" => status
     }
 
     post("/v2.10/" <> account_id <> "/campaigns", query_data).body
