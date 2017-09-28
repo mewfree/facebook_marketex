@@ -11,12 +11,7 @@ defmodule FacebookMarketex.Api do
     # Map.get(result_body, "data")
   # end
 
-  def ad_accounts() do
-    get("/v2.10/me/adaccounts").body
-    |> Map.get("data")
-  end
-
-  def ad_accounts(fields) do
+  def ad_accounts(fields \\ []) do
     get("/v2.10/me/adaccounts", query: [fields: Enum.join(fields, ",")]).body
     |> Map.get("data")
   end
@@ -30,8 +25,8 @@ defmodule FacebookMarketex.Api do
     |> Map.get("name")
   end
 
-  def get_campaigns(account_id) do
-    get("/v2.10/" <> account_id <> "/campaigns").body
+  def get_campaigns(account_id, fields \\ []) do
+    get("/v2.10/" <> account_id <> "/campaigns", query: [fields: Enum.join(fields, ",")]).body
     |> Map.get("data")
   end
 
