@@ -19,11 +19,6 @@ defmodule FacebookMarketex.Get do
     get("/v2.10/" <> id, query: [access_token: access_token, fields: Enum.join(fields, ",")]).body
   end
 
-  def name(access_token, id) do
-    data(access_token, id, ["name"])
-    |> Map.get("name")
-  end
-
   def campaigns(access_token, account_id, fields \\ []) do
     get("/v2.10/" <> account_id <> "/campaigns", query: [access_token: access_token, fields: Enum.join(fields, ",")]).body
     |> Map.get("data")
