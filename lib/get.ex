@@ -10,6 +10,10 @@ defmodule FacebookMarketex.Get do
     get("/v2.10/oauth/access_token", query: [grant_type: "fb_exchange_token", client_id: app_id, client_secret: app_secret, fb_exchange_token: access_token]).body
   end
 
+  def me(access_token) do
+    get("/v2.10/me", query: [access_token: access_token]).body
+  end
+
   def ad_accounts(access_token, fields \\ []) do
     get("/v2.10/me/adaccounts", query: [access_token: access_token, fields: Enum.join(fields, ",")]).body
     |> Map.get("data")
