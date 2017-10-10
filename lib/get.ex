@@ -16,7 +16,6 @@ defmodule FacebookMarketex.Get do
 
   def ad_accounts(access_token, fields \\ []) do
     get("/v2.10/me/adaccounts", query: [access_token: access_token, fields: Enum.join(fields, ",")]).body
-    |> Map.get("data")
   end
 
   def data(access_token, id, fields) do
@@ -25,7 +24,6 @@ defmodule FacebookMarketex.Get do
 
   def campaigns(access_token, account_id, fields \\ []) do
     get("/v2.10/" <> account_id <> "/campaigns", query: [access_token: access_token, fields: Enum.join(fields, ",")]).body
-    |> Map.get("data")
   end
 
   def insights(access_token, id, fields, from, to, level \\ "", breakdowns \\ [], summary \\ true) do
@@ -40,6 +38,5 @@ defmodule FacebookMarketex.Get do
           use_account_attribution_setting: true
         ]
     ).body
-    |> Map.get("data")
   end
 end
