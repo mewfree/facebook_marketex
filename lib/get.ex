@@ -28,7 +28,7 @@ defmodule FacebookMarketex.Get do
     |> Map.get("data")
   end
 
-  def insights(access_token, id, fields, from, to, level \\ "", breakdowns \\ []) do
+  def insights(access_token, id, fields, from, to, level \\ "", breakdowns \\ [], summary \\ true) do
     get("/v2.10/" <> id <> "/insights",
         query: [
           access_token: access_token,
@@ -36,6 +36,7 @@ defmodule FacebookMarketex.Get do
           time_range: Poison.encode!(%{"since": from, "until": to}),
           breakdowns: breakdowns,
           level: level,
+          default_summary: summary,
           use_account_attribution_setting: true
         ]
     ).body
