@@ -22,8 +22,8 @@ defmodule FacebookMarketex.Get do
     get("/v2.10/" <> id, query: [access_token: access_token, fields: Enum.join(fields, ",")]).body
   end
 
-  def campaigns(access_token, account_id, fields \\ []) do
-    get("/v2.10/" <> account_id <> "/campaigns", query: [access_token: access_token, fields: Enum.join(fields, ",")]).body
+  def campaigns(access_token, account_id, fields \\ [], limit \\ "") do
+    get("/v2.10/" <> account_id <> "/campaigns", query: [access_token: access_token, fields: Enum.join(fields, ","), limit: limit]).body
   end
 
   def insights(access_token, id, fields, from, to, level \\ "", breakdowns \\ [], summary \\ true) do
