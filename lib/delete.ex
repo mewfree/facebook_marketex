@@ -8,6 +8,6 @@ defmodule FacebookMarketex.Delete do
   adapter Tesla.Adapter.Hackney
 
   def node(id) do
-    delete("/v2.10/" <> id).body
+    delete("/v2.11/" <> id).body
   end
 end

@@ -14,7 +14,7 @@ defmodule FacebookMarketex.Create do
       "status" => status
     }
 
-    post("/v2.10/" <> account_id <> "/campaigns", query_data).body
+    post("/v2.11/" <> account_id <> "/campaigns", query_data).body
     |> Poison.decode!
   end
 end
