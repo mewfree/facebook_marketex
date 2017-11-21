@@ -22,19 +22,19 @@ defmodule FacebookMarketex.Get do
     get("/v2.11/" <> id, query: [access_token: access_token, fields: Enum.join(fields, ",")]).body
   end
 
-  def campaigns(access_token, account_id, fields \\ [], limit \\ "") do
+  def campaigns(access_token, account_id, fields \\ [], limit \\ 10000) do
     get("/v2.11/" <> account_id <> "/campaigns", query: [access_token: access_token, fields: Enum.join(fields, ","), limit: limit]).body
   end
 
-  def adsets(access_token, campaign_id, fields \\ [], limit \\ "") do
+  def adsets(access_token, campaign_id, fields \\ [], limit \\ 10000) do
     get("/v2.11/" <> campaign_id <> "/adsets", query: [access_token: access_token, fields: Enum.join(fields, ","), limit: limit]).body
   end
 
-  def ads(access_token, parent_id, fields \\ [], limit \\ "") do
+  def ads(access_token, parent_id, fields \\ [], limit \\ 50000) do
     get("/v2.11/" <> parent_id <> "/ads", query: [access_token: access_token, fields: Enum.join(fields, ","), limit: limit]).body
   end
 
-  def insights(access_token, id, fields, from, to, level \\ "", breakdowns \\ [], summary \\ true, time_increment \\ "") do
+  def insights(access_token, id, fields, from, to, level \\ "", breakdowns \\ [], summary \\ true, time_increment \\ "", limit \\ 50000) do
     get("/v2.11/" <> id <> "/insights",
         query: [
           access_token: access_token,
@@ -44,6 +44,7 @@ defmodule FacebookMarketex.Get do
           level: level,
           default_summary: summary,
           time_increment: time_increment,
+          limit: limit,
           use_account_attribution_setting: true
         ]
     ).body
