@@ -40,7 +40,7 @@ defmodule FacebookMarketex.Get do
           access_token: access_token,
           fields: Enum.join(fields, ","),
           time_range: Poison.encode!(%{"since": from, "until": to}),
-          breakdowns: breakdowns,
+          breakdowns: Enum.join(breakdowns, ","),
           level: level,
           default_summary: summary,
           time_increment: time_increment,
