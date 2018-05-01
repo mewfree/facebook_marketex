@@ -26,7 +26,7 @@ defmodule FacebookMarketex.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:tesla, "~> 0.7.0"},
+      {:tesla, "~> 0.10.0"},
       {:hackney, "~> 1.9.0"},
       {:poison, ">= 1.0.0"},
       # {:dep_from_hexpm, "~> 0.3.0"},

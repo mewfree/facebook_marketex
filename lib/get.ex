@@ -3,8 +3,9 @@ defmodule FacebookMarketex.Get do
 
   plug Tesla.Middleware.BaseUrl, "https://graph.facebook.com"
   plug Tesla.Middleware.JSON
+  plug Tesla.Middleware.Timeout, timeout: 30_000
 
-  adapter Tesla.Adapter.Hackney
+  adapter Tesla.Adapter.Hackney, recv_timeout: 30_000
 
   def long_lived_token(access_token, app_id, app_secret) do
     get("/v2.11/oauth/access_token", query: [grant_type: "fb_exchange_token", client_id: app_id, client_secret: app_secret, fb_exchange_token: access_token]).body
@@ -26,8 +27,8 @@ defmodule FacebookMarketex.Get do
     get("/v2.11/" <> account_id <> "/campaigns", query: [access_token: access_token, fields: Enum.join(fields, ","), limit: limit]).body
   end
 
-  def adsets(access_token, campaign_id, fields \\ [], limit \\ 10000) do
-    get("/v2.11/" <> campaign_id <> "/adsets", query: [access_token: access_token, fields: Enum.join(fields, ","), limit: limit]).body
+  def adsets(access_token, parent_id, fields \\ [], limit \\ 10000) do
+    get("/v2.11/" <> parent_id <> "/adsets", query: [access_token: access_token, fields: Enum.join(fields, ","), limit: limit]).body
   end
 
   def ads(access_token, parent_id, fields \\ [], limit \\ 50000) do
